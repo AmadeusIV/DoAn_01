@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ticketbox - Đặt Vé Sự Kiện</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header role="banner">
+    <div class="logo" aria-label="Logo Ticketbox">Ticketbox</div>
+    <div class="header-nav">
+      <button
+        id="sidebarToggle"
+        aria-label="Mở menu điều hướng"
+        aria-expanded="false"
+        aria-controls="sidebar"
+        class="header-button"
+      >
+        <span class="material-icons" aria-hidden="true">menu</span>
+        Menu
+      </button>
+    </div>
+  </header>
+
+  <div id="app" role="main">
+    <aside id="sidebar" class="sidebar" aria-label="Điều hướng chính" tabindex="-1">
+      <button class="close-btn" aria-label="Đóng menu điều hướng" id="sidebarCloseBtn">&times;</button>
+      <nav class="sidebar-nav" role="navigation" aria-label="Điều hướng chính Ticketbox">
+        <ul>
+          <li><button tabindex="0"><span class="material-icons" aria-hidden="true">home</span> Trang Chủ</button></li>
+          <li><button tabindex="0"><span class="material-icons" aria-hidden="true">event</span> Sự Kiện</button></li>
+          <li><button tabindex="0"><span class="material-icons" aria-hidden="true">local_offer</span> Khuyến Mãi</button></li>
+          <li><button tabindex="0"><span class="material-icons" aria-hidden="true">person</span> Hồ Sơ</button></li>
+          <li><button tabindex="0"><span class="material-icons" aria-hidden="true">settings</span> Cài Đặt</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="content-area" tabindex="0" aria-label="Nội dung sự kiện">
+      <form class="search-bar" role="search" aria-label="Tìm kiếm sự kiện">
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Tìm kiếm sự kiện..."
+          aria-describedby="searchHint"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="submit" aria-label="Tìm kiếm sự kiện">
+          <span class="material-icons" aria-hidden="true">search</span>
+        </button>
+      </form>
+      
+      <section class="events-grid" aria-live="polite" aria-relevant="additions removals" id="eventsGrid">
+        <!-- Thẻ sự kiện sẽ được chèn bởi JavaScript -->
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal: Đặt Vé -->
+  <div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+    <div class="modal" role="document">
+      <button class="modal-close" aria-label="Đóng modal đặt vé" id="modalCloseBtn">&times;</button>
+      <h2 id="modalTitle">Đặt Vé</h2>
+      <form class="booking-form" novalidate>
+        <label for="eventName">Sự Kiện</label>
+        <input type="text" id="eventName" name="eventName" readonly aria-readonly="true" />
+        
+        <label for="ticketQuantity">Số Lượng Vé</label>
+        <input type="number" id="ticketQuantity" name="ticketQuantity" min="1" max="20" required placeholder="Nhập số lượng (1-20)" aria-describedby="quantityError" />
+        <div id="quantityError" class="error-text" role="alert" aria-live="assertive"></div>
+
+        <label for="buyerName">Tên Của Bạn</label>
+        <input type="text" id="buyerName" name="buyerName" required minlength="2" placeholder="Nhập tên đầy đủ của bạn" aria-describedby="nameError" />
+        <div id="nameError" class="error-text" role="alert" aria-live="assertive"></div>
+
+        <label for="buyerEmail">Địa Chỉ Email</label>
+        <input type="email" id="buyerEmail" name="buyerEmail" required placeholder="Nhập địa chỉ email của bạn" aria-describedby="emailError" />
+        <div id="emailError" class="error-text" role="alert" aria-live="assertive"></div>
+
+        <button type="submit" class="btn" aria-label="Xác nhận đặt vé">
+          <span class="material-icons" aria-hidden="true">check</span> Xác Nhận Đặt Vé
+        </button>
+      </form>
+      <p id="bookingSuccess" class="success-text" role="alert" aria-live="polite" hidden>Đặt vé thành công! Vé điện tử của bạn sẽ được gửi qua email.</p>
+    </div>
+  </div>
+
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true" aria-relevant="additions"></div>
+
+  <script src="../js/TrangChu.js"></script>
+</body>
+</html>
+
